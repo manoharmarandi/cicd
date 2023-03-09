@@ -47,12 +47,12 @@ jobs:
       with:
         credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
     # WARNING: The --cred-file flag is in preview and is subject to change.
-    # - id: 'gcloud'
-    #   name: 'gcloud'
-    #   run: |-
-    #     gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-    #     gcloud components install docker-credential-gcr
-    #     gcloud --quiet auth configure-docker
+    - id: 'gcloud'
+      name: 'gcloud'
+      run: |-
+        gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+        gcloud components install docker-credential-gcr
+        gcloud --quiet auth configure-docker
     - name: Generate build ID
       id: prep
       run: |
