@@ -63,7 +63,7 @@ jobs:
     - name: Build docker
       id: build
       run: |-
-        GCR_IMAGE=gcr.io/$PROJECT_ID/$IMAGE:dev-${{ env.GITHUB_SHA_SHORT }}
+        GCR_IMAGE=gcr.io/$PROJECT_ID/$IMAGE
         docker build . --tag $GCR_IMAGE
         docker push $GCR_IMAGE
         echo "::set-output name=image::$GCR_IMAGE"
