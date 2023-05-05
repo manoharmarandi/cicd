@@ -65,7 +65,7 @@ jobs:
       run: |-
         GCR_IMAGE=gcr.io/$PROJECT_ID/$IMAGE
         docker build . --tag $GCR_IMAGE
-        # docker push $GCR_IMAGE
+        docker push $GCR_IMAGE
         echo "::set-output name=image::$GCR_IMAGE"
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
