@@ -65,7 +65,7 @@ jobs:
       run: |-
         GCR_IMAGE=gcr.io/$PROJECT_ID/$IMAGE
         docker build . --tag $GCR_IMAGE
-        docker push $GCR_IMAGE
+        # docker push $GCR_IMAGE
         echo "::set-output name=image::$GCR_IMAGE"
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
@@ -75,10 +75,14 @@ jobs:
         exit-code: '0'
         severity: 'MEDIUM,HIGH,CRITICAL'
     # Push the Docker image to Google Container Registry
-    - name: Deploy to Cloud Run
-      run: |-
-        gcloud config set project $PROJECT_ID
-        gcloud config set run/region us-central1
-        gcloud run deploy $IMAGE --image=${{ steps.build.outputs.image }} \
-        --platform managed \
-        --allow-unauthenticated
+    # - name: Deploy to Cloud Run
+    #   run: |-
+    #     gcloud config set project $PROJECT_ID
+    #     gcloud config set run/region us-central1
+    #     gcloud run deploy $IMAGE --image=${{ steps.build.outputs.image }} \
+    #     --platform managed \
+    #     --allow-unauthenticated
+    - name: Run HawkScan
+      uses: stackhawk/hawkscan-action@v2
+      with:
+        apiKey: ${{ secrets.HAWK_API_KEY }}
