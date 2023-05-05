@@ -6,10 +6,6 @@ app:
   env: Development # (required)
   # -- The url of your application to scan --
   host: https://dvwa-dl4ymzsdca-uc.a.run.app # (required)
-authentication:
-    usernamePassword:
-      scanUsername: admin
-      scanPassword: password 
 
 # -- Customized Configuration for GraphQL/SOAP/OpenAPI, add here --
   # Configuration Docs: https://docs.stackhawk.com/hawkscan/configuration/
